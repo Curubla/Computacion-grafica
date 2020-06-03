@@ -1,0 +1,449 @@
+ <!DOCTYPE html>
+<html>
+  <head>
+    <title>Basic Three.js App with iluminacion ajwdjhjkawd</title>
+    <style>
+      html, body { margin: 0; padding: 0; overflow: hidden; }
+    </style>
+  </head>
+  <body>
+    <script src="js/three.js"></script>
+    <script src="js/controls/OrbitControls.js"></script>
+	<script src="js/csg.js"></script>
+	<script src="js/THREE.CSG.js"></script>
+	
+    <script>
+		var scene, aspect, camera, renderer, controls;
+		var startTime = Date.now();
+		var PacoElFlaco;
+		var mapWidth = 320, mapHeight = 240;
+		var w = window.innerWidth, h = window.innerHeight;
+		var aKey = false;
+        var sKey = false;
+        var dKey = false;
+		var qKey = false;
+        var wKey = false;
+        var eKey = false;
+
+		var light2;
+		var sumL=1;
+
+
+
+
+
+		init();
+		animate();
+	
+		function init(){
+		
+		
+		
+			var onKeyDown = function ( event ) {
+				switch ( event.keyCode ) {
+						
+					case 65: // ROTAR X
+						aKey = true;
+						break;
+					case 83: // ROTAR Y
+						sKey = true;
+						break;
+                    case 68: // ROTAR Z
+						dKey = true;
+						break;
+					case 81: // 
+						qKey = true;
+						break;	
+					case 87: // ROTAR Z
+						wKey = true;
+						break;
+					case 69: // ROTAR Z
+						eKey = true;
+						break;
+					
+				}
+			};	
+
+			var onKeyUp = function ( event ) {
+				switch ( event.keyCode ) {
+					
+				
+					case 65: // 
+						aKey = false;
+						break;
+					case 83: // 
+						sKey = false;
+						break;
+                    case 68: // 
+						dKey = false;
+						break;
+					case 81: // 
+						qKey = false;
+						break;	
+					case 87: // ROTAR Z
+						wKey = false;
+						break;
+					case 69: // ROTAR Z
+						eKey = false;
+						break;
+					
+					
+				}
+			};
+			
+			document.addEventListener( 'keydown', onKeyDown, false );
+			document.addEventListener( 'keyup', onKeyUp, false );
+		  
+		
+			scene = new THREE.Scene();
+			scene.background = new THREE.Color( 0x364A73 );
+			aspect = window.innerWidth / window.innerHeight;
+			camera = new THREE.PerspectiveCamera( 45, aspect, 0.1, 1000);
+			
+			renderer = new THREE.WebGLRenderer({alpha: true});
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			document.body.appendChild( renderer.domElement );
+			controls = new THREE.OrbitControls( camera, renderer.domElement );
+				  
+			var size = 10;
+			var arrowSize = 1;
+			var divisions = size;
+			var origin = new THREE.Vector3( 0, 0, 0 );
+			PacoElFlaco = new THREE.PerspectiveCamera( 45, 1, 0.1, 50);
+			
+			
+			/*
+			// Create lights
+			var light = new THREE.PointLight(0xEEEEEE);
+			light.position.set(20, 0, 20);
+			scene.add(light);
+
+			var lightAmb = new THREE.AmbientLight(0x777777);
+			scene.add(lightAmb);
+			
+			
+			
+			
+			// Load the background texture
+			var texture = THREE.TextureLoader( '01.jpg' );
+			var backgroundMesh = new THREE.Mesh(
+				new THREE.PlaneGeometry(2, 2, 0),
+				new THREE.MeshBasicMaterial(texture));
+
+			backgroundMesh .material.depthTest = false;
+			backgroundMesh .material.depthWrite = false;
+
+			// Create your background scene
+			var backgroundScene = new THREE.Scene();
+			var backgroundCamera = new THREE.Camera();
+			backgroundScene.add(backgroundCamera );
+			backgroundScene.add(backgroundMesh );
+			
+
+			// instantiate a loader
+			var loader = new THREE.ImageLoader();
+
+			// load a image resource
+			loader.load(
+				// resource URL
+				'01.jpg',
+
+				// onLoad callback
+				function ( image ) {
+					// use the image, e.g. draw part of it on a canvas
+					var canvas = document.createElement( 'canvas' );
+					var context = canvas.getContext( '2d' );
+					context.drawImage( image, 100, 100 );
+				},
+
+				// onProgress callback currently not supported
+				undefined,
+
+				// onError callback
+				function () {
+					console.error( 'An error happened.' );
+				}
+			);
+
+			scene.background(loader);
+			
+			
+			var loader = new THREE.TextureLoader();
+			var bgTexture = loader.load('https://c4.wallpaperflare.com/wallpaper/582/105/170/5c1c85b942ecd-wallpaper-preview.jpg');
+			scene.background = bgTexture;
+			*/
+			//TEXTURAS
+			var textureLoader = new THREE.TextureLoader();
+			ObjT=textureLoader.load("Texturas/Obj.jpg");
+			ObjNP=textureLoader.load("Texturas/ObjNP.jpg");
+			//ObjD=textureLoader.load("Texturas/ObjD.jpg");
+
+			PlasterT=textureLoader.load("Texturas/Plaster.jpg");
+			PlasterNP=textureLoader.load("Texturas/PlasterNP.jpg");
+
+			ColumnaT=textureLoader.load("Texturas/Columna.jpg");
+			ColumnaNP=textureLoader.load("Texturas/ColumnaNP.jpg");
+
+			ConcreteT=textureLoader.load("Texturas/Concrete2.jpg");
+			ContreteNP=textureLoader.load("Texturas/ConcreteNP.jpg");
+			ContreteD=textureLoader.load("Texturas/ConcreteD.jpg");
+			ContreteG=textureLoader.load("Texturas/ConcreteG.jpg");
+			
+			//materiales
+			var matPhong1 = new THREE.MeshPhongMaterial( {color: 0x5983D9, map: ConcreteT, normalMap:ContreteNP} );
+			var matLamb1 = new THREE.MeshLambertMaterial( {color: 0x888c8d} );
+			var material1 = new THREE.MeshStandardMaterial( { color: 0xffffff})
+			
+			var material2 = new THREE.MeshStandardMaterial( { color: 0x3B2C25, map: PlasterT, normalMap:PlasterNP, glosinessMap: ContreteG})
+			
+			var matLamb2 = new THREE.MeshLambertMaterial( {color: 0x5983D9} );
+
+			var matLamb3 = new THREE.MeshStandardMaterial( {color: 0xF9E0E4, map:ColumnaT, normalMap:ColumnaNP, roughnessMap: ContreteD});
+			
+			var materialObj1 = new THREE.MeshStandardMaterial( { color: 0xDDB6B8, map: ObjT, normalMap:ObjNP})
+			
+			
+			
+			//OBJETOS
+			var plane = new THREE.Mesh( 
+				new THREE.CylinderGeometry( 8, 8, 0.5, 8 ), 
+				material2
+				) 
+			plane.translateY(-1);
+			scene.add( plane );
+			
+			var plane2 = new THREE.Mesh( 
+				new THREE.CylinderGeometry( 24, 24, 0.5, 8 ), 
+				material2
+				) 
+			plane2.translateY(-1.2);
+			scene.add( plane2 );
+			
+			
+			
+			
+			var geoCaja = new THREE.BoxGeometry(1, 1, 1);
+			var material = new THREE.MeshBasicMaterial({
+				color: 0xB0C1D1,
+				 metalness: 0.5
+			});
+			
+			
+			
+			var obj1 = new THREE.Mesh(
+				new THREE.CylinderGeometry( 0, 2, 4, 8 ),
+				materialObj1);
+			obj1.translateY(1.5);	
+			
+			scene.add(obj1);
+			
+			
+			
+			var cube2 = new THREE.Mesh(geoCaja, matLamb1);
+			scene.add(cube2);
+			cube2.translateX(8);
+			
+			var cube22 = new THREE.Mesh(geoCaja, material1);
+			scene.add(cube22);
+			cube22.translateX(16);
+			
+			
+			
+			var cube3 = new THREE.Mesh(geoCaja, material1);
+			scene.add(cube3);
+			cube3.translateX(-8);
+			
+			var cube33 = new THREE.Mesh(geoCaja, matLamb1);
+			scene.add(cube33);
+			cube33.translateX(-16);
+			
+			
+			
+			var luz1 = new THREE.Mesh(
+				new THREE.CylinderGeometry( 0, 8, 4, 4 ),
+				matPhong1);
+			luz1.translateY(10.5);	
+			
+			scene.add(luz1);
+			
+			
+			var luz2 = new THREE.Mesh(
+				new THREE.CylinderGeometry( 3, 3, 15, 4 ),
+				matPhong1);
+			luz2.translateY(18.5);	
+			
+			scene.add(luz2);
+
+
+			
+
+			var Pared = new THREE.Mesh(
+				new THREE.CylinderGeometry( 2, 2, 12, 8 ),
+				material2);
+
+			Pared.translateX(24);
+			Pared.translateY(5);
+
+			
+
+			var ParedBaja = new THREE.Mesh(
+				new THREE.CylinderGeometry( 3, 3, 1, 8 ),
+				matLamb3);
+
+			ParedBaja.translateX(24);
+			ParedBaja.translateY(-1);
+			
+
+			var ParedAlta = new THREE.Mesh(
+				new THREE.CylinderGeometry( 3, 3, 1, 8 ),
+				matLamb3);
+
+			ParedAlta.translateX(24);
+			ParedAlta.translateY(11);
+			/*
+			scene.add(Pared);
+			scene.add(ParedBaja);
+			scene.add(ParedAlta);
+			*/
+			var BP1 = THREE.CSG.fromMesh( Pared );
+			var BP2 = THREE.CSG.fromMesh( ParedAlta );
+			var BP3 = THREE.CSG.fromMesh( ParedBaja );
+			
+			
+			var result2 = BP2.union( BP1 );
+			var result1 = BP3.union( BP1 );
+			
+			var resultF = result1.union( result2 );
+			
+			var Columna = THREE.CSG.toMesh( resultF );
+
+			Columna.material = material2;
+			
+			
+			scene.add(Columna);
+
+			var Columna2 = Columna.clone();
+
+			Columna2.translateX(-7);
+			Columna2.translateZ(18);
+			scene.add(Columna2);
+
+			var Columna3 = Columna.clone();
+
+			Columna3.translateX(-7);
+			Columna3.translateZ(-18);
+			scene.add(Columna3);
+
+			var Columna4 = Columna.clone();
+
+			Columna4.translateX(-24);
+			Columna4.translateZ(24);
+			scene.add(Columna4);
+
+			var Columna5 = Columna.clone();
+
+			Columna5.translateX(-24);
+			Columna5.translateZ(-24);
+			scene.add(Columna5);
+
+			var Columna6 = Columna.clone();
+
+			Columna6.translateX(-41);
+			Columna6.translateZ(18);
+			scene.add(Columna6);
+
+			var Columna7 = Columna.clone();
+
+			Columna7.translateX(-41);
+			Columna7.translateZ(-18);
+			scene.add(Columna7);
+
+			var Columna8 = Columna.clone();
+
+			Columna8.translateX(-48);
+			scene.add(Columna8);
+
+			
+			
+			//Luces
+			var light = new THREE.AmbientLight( 0x405173 ); 
+			scene.add( light );
+			
+			var directionalLight1 = new THREE.DirectionalLight( 0xede9da, 1);
+			directionalLight1.position.set( 40, 4, 0 );
+			directionalLight1.target = cube22;
+			scene.add( directionalLight1 );
+			
+			var directionalLight2 = new THREE.DirectionalLight( 0x94F2F2, 1);
+			directionalLight2.position.set( -40, 4, 0 );
+			directionalLight2.target = cube33;
+			scene.add( directionalLight2 );
+			
+			light2 = new THREE.PointLight( 0x94f2f2, 5, 50 );
+			light2.position.set( 0, 8, 0 );
+			scene.add( light2 );
+			
+			var spotLight = new THREE.SpotLight( 0xd9c5d7 );
+			spotLight.position.set( 0, 100, 0 );
+
+			spotLight.castShadow = true;
+
+			spotLight.shadow.mapSize.width = 1024;
+			spotLight.shadow.mapSize.height = 1024;
+
+			spotLight.shadow.camera.near = 500;
+			spotLight.shadow.camera.far = 4000;
+			spotLight.shadow.camera.fov = 30;
+			
+			spotLight.target = obj1;
+
+			scene.add( spotLight );
+			
+			scene.fog = new THREE.Fog(0xd9c5d7, 1, 135);
+			
+			camera.position.x = 0;
+			camera.position.y = 30;	 
+		  	camera.position.z =  75;
+			
+		  	camera.lookAt( origin );
+
+			PacoElFlaco.position.x = -10;
+			PacoElFlaco.position.y = 7;
+		  	PacoElFlaco.position.z = 25;
+			PacoElFlaco.lookAt( 0, 1, 0 );
+			
+			renderer.render( scene, camera );
+		}
+		function animate() {
+			requestAnimationFrame( animate );
+			controls.update(); // required if controls.enableDamping = true, or if controls.autoRotate = true
+			render();
+		}
+		function render() {
+			renderer.setViewport( 0, 0, w, h );
+            renderer.setScissor( 0, 0, w, h );
+            renderer.render( scene, camera );
+
+			renderer.setViewport( 10, 10, mapWidth, mapHeight );
+            renderer.setScissor( 10, 10, mapWidth, mapHeight );
+            renderer.setScissorTest( true );
+            renderer.render( scene, PacoElFlaco );
+
+			if(aKey){
+				light2.intensity = 0.0;
+				sumL=0;
+			}
+			if(qKey){
+				light2.intensity = 50.0;
+			}
+			if(wKey){
+				sumL=sumL+1;
+				light2.intensity = sumL;
+			}
+
+			console.log(aKey,"-",qKey);
+
+		}
+    </script>
+  </body>
+</html>
