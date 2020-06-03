@@ -1,0 +1,708 @@
+<!doctype html>
+<html>
+<head>
+<title> code trabajo </title>
+
+	<script src="http://d3js.org/d3.v3.min.js">  </script>
+	<script src="js/three.js"></script>
+    <script src="js/controls/OrbitControls.js"></script>
+    <script src='js/libs/dat.gui.min.js'></script>
+	
+</head> <div id="my_dataviz"></div>
+<body>
+<script>
+
+var canvas= d3.select ("body")
+.append("svg")
+.attr("width",800)
+.attr("height", 800);
+var circle22= canvas.append("circle").attr("id", "circleB22")
+.attr("cx", 280)
+.attr("cy",520)
+.attr("r", 0)
+.attr("fill", "pink");
+var circle21= canvas.append("circle").attr("id", "circleB21")
+.attr("cx", 280)
+.attr("cy",480)
+.attr("r", 0)
+.attr("fill", "pink");
+var line8= canvas.append("line")
+.attr("x1", 50)
+.attr("y1",100)
+.attr("x2", 50)
+.attr("y2", 100)
+.attr("stroke", "orange")
+.attr("stroke-width", 5);
+var circle20= canvas.append("circle").attr("id", "circleB20")
+.attr("cx", 50)
+.attr("cy",100)
+.attr("r", 15)
+.attr("fill", "black");
+
+var line7= canvas.append("line")
+.attr("x1", 50)
+.attr("y1",100)
+.attr("x2", 50)
+.attr("y2", 100)
+.attr("stroke", "orange")
+.attr("stroke-width", 5);
+var circle19= canvas.append("circle").attr("id", "circleB19")
+.attr("cx", 50)
+.attr("cy",100)
+.attr("r", 15)
+.attr("fill", "black");
+
+
+var easteregg= canvas.append("circle").attr("id", "easteregg")
+.attr("cx", 500)
+.attr("cy",500)
+.attr("r", 5)
+.attr("fill", "white");
+var circle15= canvas.append("circle").attr("id", "circleB15")
+.attr("cx", 350)
+.attr("cy",400)
+.attr("r", 0)
+.attr("fill", "pink");
+var circle14= canvas.append("circle").attr("id", "circleB14")
+.attr("cx", 350)
+.attr("cy",350)
+.attr("r", 0)
+.attr("fill", "pink");
+var circle13= canvas.append("circle").attr("id", "circleB13")
+.attr("cx", 350)
+.attr("cy",300)
+.attr("r", 0)
+.attr("fill", "pink");
+var circle12= canvas.append("circle").attr("id", "circleB12")
+.attr("cx", 350)
+.attr("cy",325)
+.attr("r", 0)
+.attr("fill", "pink");
+
+var circle16= canvas.append("circle").attr("id", "circleB16")
+.attr("cx", 370)
+.attr("cy",30)
+.attr("r", 0)
+.attr("fill", "pink");
+var circle10= canvas.append("circle").attr("id", "circleB10")
+.attr("cx", 350)
+.attr("cy",10)
+.attr("r", 0)
+.attr("fill", "pink");
+var circle11= canvas.append("circle").attr("id", "circleB11")
+.attr("cx", 350)
+.attr("cy",50)
+.attr("r", 0)
+.attr("fill", "pink");
+
+var circle18= canvas.append("circle").attr("id", "circleB18")
+.attr("cx", 280)
+.attr("cy",100)
+.attr("r", 0)
+.attr("fill", "pink");
+var circle17= canvas.append("circle").attr("id", "circleB17")
+.attr("cx", 300)
+.attr("cy",120)
+.attr("r", 0)
+.attr("fill", "pink");
+var circle8= canvas.append("circle").attr("id", "circleB8")
+.attr("cx", 330)
+.attr("cy",120)
+.attr("r", 0)
+.attr("fill", "pink");
+var circle9= canvas.append("circle").attr("id", "circleB9")
+.attr("cx", 350)
+.attr("cy",100)
+.attr("r", 0)
+.attr("fill", "pink");
+
+
+var line5= canvas.append("line")
+.attr("x1", 250)
+.attr("y1",350)
+.attr("x2", 250)
+.attr("y2", 350)
+.attr("stroke", "orange")
+.attr("stroke-width", 5);
+var line6= canvas.append("line")
+.attr("x1", 250)
+.attr("y1",350)
+.attr("x2", 250)
+.attr("y2", 350)
+.attr("stroke", "orange")
+.attr("stroke-width", 5);
+var line3= canvas.append("line")
+.attr("x1", 250)
+.attr("y1",50)
+.attr("x2", 250)
+.attr("y2", 50)
+.attr("stroke", "orange")
+.attr("stroke-width", 5);
+var line4= canvas.append("line")
+.attr("x1", 250)
+.attr("y1",50)
+.attr("x2", 250)
+.attr("y2", 50)
+.attr("stroke", "orange")
+.attr("stroke-width", 5);
+var circle7= canvas.append("circle").attr("id", "circleB7")
+.attr("cx", 50)
+.attr("cy",100)
+.attr("r", 15)
+.attr("fill", "black");
+var circle6= canvas.append("circle").attr("id", "circleB6")
+.attr("cx", 50)
+.attr("cy",100)
+.attr("r", 15)
+.attr("fill", "black");
+
+
+var circle5= canvas.append("circle").attr("id", "circleB5")
+.attr("cx", 50)
+.attr("cy",100)
+.attr("r", 15)
+.attr("fill", "black");
+var circle4= canvas.append("circle").attr("id", "circleB4")
+.attr("cx", 50)
+.attr("cy",100)
+.attr("r", 15)
+.attr("fill", "black");
+
+var line= canvas.append("line")
+.attr("x1", 50)
+.attr("y1",100)
+.attr("x2", 50)
+.attr("y2", 100)
+.attr("stroke", "orange")
+.attr("stroke-width", 10);
+var line2= canvas.append("line")
+.attr("x1", 50)
+.attr("y1",100)
+.attr("x2", 50)
+.attr("y2", 100)
+.attr("stroke", "orange")
+.attr("stroke-width", 10);
+var circle3= canvas.append("circle").attr("id", "circleB3")
+.attr("cx", 50)
+.attr("cy",100)
+.attr("r", 20)
+.attr("fill", "red");
+var circle2= canvas.append("circle").attr("id", "circleB2")
+.attr("cx", 50)
+.attr("cy",100)
+.attr("r", 20)
+.attr("fill", "red");
+var circle= canvas.append("circle").attr("id", "circleB")
+.attr("cx", 50)
+.attr("cy",100)
+.attr("r", 25)
+.attr("fill", "red");
+
+
+var tooltip = d3.select("#my_dataviz")
+  .append("div")
+    .style("position", "absolute")
+    .style("visibility", "hidden")
+	.style("background-color", "#FA5858")
+    .style("border", "solid")
+    .style("border-width", "2px")
+    .style("border-radius", "30px")
+    .style("padding", "10px")
+    .html("<p>Caninae: Unica subfamilia no extinta de la familia de los caninos</p><img src='https://i.imgur.com/UwqhiJ3.png'></img>");
+	var tooltip2 = d3.select("#my_dataviz")
+  .append("div")
+    .style("position", "absolute")
+    .style("visibility", "hidden")
+	.style("background-color", "#A4A4A4")
+    .style("border", "solid")
+    .style("border-width", "2px")
+    .style("border-radius", "30px")
+    .style("padding", "10px")
+    .html("<p>Vulpini: Tribu caracterizada por fino hocico y una espesa cola</p><img src='https://i.imgur.com/PQIdkYN.png'></img>");
+	var tooltip3 = d3.select("#my_dataviz")
+  .append("div")
+    .style("position", "absolute")
+    .style("visibility", "hidden")
+	.style("background-color", "#A4A4A4")
+    .style("border", "solid")
+    .style("border-width", "2px")
+    .style("border-radius", "30px")
+    .style("padding", "10px")
+    .html("<p>Canini: Tribu reconocida por presentar un alargamiento en la parte frontal del craneo</p><img src='https://i.imgur.com/ooHE8Vx.png'></img>");
+	var tooltip14 = d3.select("#my_dataviz")
+  .append("div")
+    .style("position", "absolute")
+    .style("visibility", "hidden")
+	.style("background-color", "#BFFFBB")
+    .style("border", "solid")
+    .style("border-width", "2px")
+    .style("border-radius", "30px")
+    .style("padding", "10px")
+    .html("<p>easteregg</p><img src='https://i.pinimg.com/564x/b9/25/14/b9251413debb936bbc62295515b9ed41.jpg'></img>");
+var tooltip4 = d3.select("#my_dataviz")
+  .append("div")
+    .style("position", "absolute")
+    .style("visibility", "hidden")
+	.style("background-color", "#F6CEE3")
+    .style("border", "solid")
+    .style("border-width", "2px")
+    .style("border-radius", "30px")
+    .style("padding", "10px")
+    .html("<p>Culpaeus: Zorro Colorado</p><img src='https://i.imgur.com/Z8F5m1y.png'></img>");
+var tooltip5 = d3.select("#my_dataviz")
+  .append("div")
+    .style("position", "absolute")
+    .style("visibility", "hidden")
+	.style("background-color", "#BFFFBB")
+    .style("border", "solid")
+    .style("border-width", "2px")
+    .style("border-radius", "30px")
+    .style("padding", "10px")
+    .html("<p>Canis</p><img src='https://i.imgur.com/yO6dvEE.png'></img>");
+	var tooltip6 = d3.select("#my_dataviz")
+  .append("div")
+    .style("position", "absolute")
+    .style("visibility", "hidden")
+	.style("background-color", "#BFFFBB")
+    .style("border", "solid")
+    .style("border-width", "2px")
+    .style("border-radius", "30px")
+    .style("padding", "10px")
+    .html("<p>Vulpes</p><img src='https://i.imgur.com/8f8nPi3.png'></img>");
+	var tooltip7 = d3.select("#my_dataviz")
+  .append("div")
+    .style("position", "absolute")
+    .style("visibility", "hidden")
+	.style("background-color", "#BFFFBB")
+    .style("border", "solid")
+    .style("border-width", "2px")
+    .style("border-radius", "30px")
+    .style("padding", "10px")
+    .html("<p>Nyctereutes</p><img src='https://i.imgur.com/I5WCSGj.png'></img>");
+	var tooltip8 = d3.select("#my_dataviz")
+  .append("div")
+    .style("position", "absolute")
+    .style("visibility", "hidden")
+	.style("background-color", "#BFFFBB")
+    .style("border", "solid")
+    .style("border-width", "2px")
+    .style("border-radius", "30px")
+    .style("padding", "10px")
+    .html("<p>Leptocyon</p><img src='https://i.imgur.com/uO5zU5c.png'></img>");	
+	var tooltip9 = d3.select("#my_dataviz")
+  .append("div")
+    .style("position", "absolute")
+    .style("visibility", "hidden")
+	.style("background-color", "#BFFFBB")
+    .style("border", "solid")
+    .style("border-width", "2px")
+    .style("border-radius", "30px")
+    .style("padding", "10px")
+    .html("<p>Urocyon</p><img src='https://i.imgur.com/OMFYADA.png'></img>");	
+	var tooltip10 = d3.select("#my_dataviz")
+  .append("div")
+    .style("position", "absolute")
+    .style("visibility", "hidden")
+	.style("background-color", "#BFFFBB")
+    .style("border", "solid")
+    .style("border-width", "2px")
+    .style("border-radius", "30px")
+    .style("padding", "10px")
+    .html("<p>Lycalopex</p><img src='https://i.imgur.com/QKfeK0d.png'></img>");
+	
+	
+	var tooltip30 = d3.select("#my_dataviz")
+  .append("div")
+    .style("position", "absolute")
+    .style("visibility", "hidden")
+	.style("background-color", "#F6CEE3")
+    .style("border", "solid")
+    .style("border-width", "2px")
+    .style("border-radius", "30px")
+    .style("padding", "10px")
+    .html("<p>Vetulus: Zorro Hoary</p><img src='https://i.imgur.com/YDZ1Arr.png'></img>");	
+	
+	
+	var tooltip31 = d3.select("#my_dataviz")
+	.append("div")
+    .style("position", "absolute")
+    .style("visibility", "hidden")
+	.style("background-color", "#F6CEE3")
+    .style("border", "solid")
+    .style("border-width", "2px")
+    .style("border-radius", "30px")
+    .style("padding", "10px")
+    .html("<p>Fulvipes: Zorro Chilote</p><img src='https://i.imgur.com/GrrjoEe.png'></img>");
+
+
+	var tooltip32 = d3.select("#my_dataviz")
+  .append("div")
+    .style("position", "absolute")
+    .style("visibility", "hidden")
+	.style("background-color", "#F6CEE3")
+    .style("border", "solid")
+    .style("border-width", "2px")
+    .style("border-radius", "30px")
+    .style("padding", "10px")
+    .html("<p>Littoralis: Zorro Isleño</p><img src='https://i.imgur.com/t6JjtYX.png'></img>");	
+	
+	
+	var tooltip33 = d3.select("#my_dataviz")
+	.append("div")
+    .style("position", "absolute")
+    .style("visibility", "hidden")
+	.style("background-color", "#F6CEE3")
+    .style("border", "solid")
+    .style("border-width", "2px")
+    .style("border-radius", "30px")
+    .style("padding", "10px")
+    .html("<p>Cinereoargenteus: Zorro Gris</p><img src='https://i.imgur.com/9GGjCx7.png'></img>");		
+	
+	
+	
+	var tooltip34 = d3.select("#my_dataviz")
+  .append("div")
+    .style("position", "absolute")
+    .style("visibility", "hidden")
+	.style("background-color", "#F6CEE3")
+    .style("border", "solid")
+    .style("border-width", "2px")
+    .style("border-radius", "30px")
+    .style("padding", "10px")
+    .html("<p>Lupus Familiaris: Perro Domestico</p><img src='https://i.imgur.com/QzkGLV5.png'></img>");	
+	
+	
+	var tooltip35 = d3.select("#my_dataviz")
+	.append("div")
+    .style("position", "absolute")
+    .style("visibility", "hidden")
+	.style("background-color", "#F6CEE3")
+    .style("border", "solid")
+    .style("border-width", "2px")
+    .style("border-radius", "30px")
+    .style("padding", "10px")
+    .html("<p>Lupus: Lobo Gris</p><img src='https://i.imgur.com/MQeXL1u.png'></img>");	
+
+
+	var tooltip36 = d3.select("#my_dataviz")
+  .append("div")
+    .style("position", "absolute")
+    .style("visibility", "hidden")
+	.style("background-color", "#F6CEE3")
+    .style("border", "solid")
+    .style("border-width", "2px")
+    .style("border-radius", "30px")
+    .style("padding", "10px")
+    .html("<p>Mesomelas: Chacal</p><img src='https://i.imgur.com/cdW3NrI.png'></img>");	
+	
+	
+	var tooltip37 = d3.select("#my_dataviz")
+	.append("div")
+    .style("position", "absolute")
+    .style("visibility", "hidden")
+	.style("background-color", "#F6CEE3")
+    .style("border", "solid")
+    .style("border-width", "2px")
+    .style("border-radius", "30px")
+    .style("padding", "10px")
+    .html("<p>Latrans: Coyote</p><img src='https://i.imgur.com/PEfzdNu.png'></img>");	
+
+
+	var tooltip38 = d3.select("#my_dataviz")
+	.append("div")
+    .style("position", "absolute")
+    .style("visibility", "hidden")
+	.style("background-color", "#F6CEE3")
+    .style("border", "solid")
+    .style("border-width", "2px")
+    .style("border-radius", "30px")
+    .style("padding", "10px")
+    .html("<p>Vulpes: Zorro Rojo</p><img src='https://i.imgur.com/OH0QGFo.png'></img>");	
+
+
+	var tooltip39 = d3.select("#my_dataviz")
+  .append("div")
+    .style("position", "absolute")
+    .style("visibility", "hidden")
+	.style("background-color", "#F6CEE3")
+    .style("border", "solid")
+    .style("border-width", "2px")
+    .style("border-radius", "30px")
+    .style("padding", "10px")
+    .html("<p>Rueppellii: Zorro de Arena</p><img src='https://i.imgur.com/cdW3NrI.png'></img>");	
+	
+	
+	var tooltip40 = d3.select("#my_dataviz")
+	.append("div")
+    .style("position", "absolute")
+    .style("visibility", "hidden")
+	.style("background-color", "#F6CEE3")
+    .style("border", "solid")
+    .style("border-width", "2px")
+    .style("border-radius", "30px")
+    .style("padding", "10px")
+    .html("<p>Lagopus: Zorro Artico</p><img src='https://i.imgur.com/XuFJAZz.png'></img>");	
+
+
+	
+	var tooltip41 = d3.select("#my_dataviz")
+	.append("div")
+    .style("position", "absolute")
+    .style("visibility", "hidden")
+	.style("background-color", "#F6CEE3")
+    .style("border", "solid")
+    .style("border-width", "2px")
+    .style("border-radius", "30px")
+    .style("padding", "10px")
+    .html("<p>Procyonoides: Tanuki</p><img src='https://i.imgur.com/ZjYsL7g.png'></img>");	
+
+//
+d3.select("#circleB")
+  .on("mouseover", function(){return tooltip.style("visibility", "visible");})
+  .on("mousemove", function(){return tooltip.style("top", (event.pageY+10)+"px").style("left",(event.pageX+10)+"px");})
+  .on("mouseout", function(){return tooltip.style("visibility", "hidden");});
+  d3.select("#circleB3")
+  .on("mouseover", function(){return tooltip2.style("visibility", "visible");})
+  .on("mousemove", function(){return tooltip2.style("top", (event.pageY+10)+"px").style("left",(event.pageX+10)+"px");})
+  .on("mouseout", function(){return tooltip2.style("visibility", "hidden");});
+d3.select("#circleB2")
+  .on("mouseover", function(){return tooltip3.style("visibility", "visible");})
+  .on("mousemove", function(){return tooltip3.style("top", (event.pageY+10)+"px").style("left",(event.pageX+10)+"px");})
+  .on("mouseout", function(){return tooltip3.style("visibility", "hidden");});
+
+d3.select("#easteregg")
+  .on("mouseover", function(){return tooltip14.style("visibility", "visible");})
+  .on("mousemove", function(){return tooltip14.style("top", (event.pageY+10)+"px").style("left",(event.pageX+10)+"px");})
+  .on("mouseout", function(){return tooltip14.style("visibility", "hidden");});
+d3.select("#circleB4")
+  .on("mouseover", function(){return tooltip10.style("visibility", "visible");})
+  .on("mousemove", function(){return tooltip10.style("top", (event.pageY+10)+"px").style("left",(event.pageX+10)+"px");})
+  .on("mouseout", function(){return tooltip10.style("visibility", "hidden");});
+  d3.select("#circleB5")
+  .on("mouseover", function(){return tooltip5.style("visibility", "visible");})
+  .on("mousemove", function(){return tooltip5.style("top", (event.pageY+10)+"px").style("left",(event.pageX+10)+"px");})
+  .on("mouseout", function(){return tooltip5.style("visibility", "hidden");});
+  d3.select("#circleB6")
+  .on("mouseover", function(){return tooltip6.style("visibility", "visible");})
+  .on("mousemove", function(){return tooltip6.style("top", (event.pageY+10)+"px").style("left",(event.pageX+10)+"px");})
+  .on("mouseout", function(){return tooltip6.style("visibility", "hidden");});
+  d3.select("#circleB7")
+  .on("mouseover", function(){return tooltip7.style("visibility", "visible");})
+  .on("mousemove", function(){return tooltip7.style("top", (event.pageY+10)+"px").style("left",(event.pageX+10)+"px");})
+  .on("mouseout", function(){return tooltip7.style("visibility", "hidden");});
+  d3.select("#circleB10")
+  .on("mouseover", function(){return tooltip4.style("visibility", "visible");})
+  .on("mousemove", function(){return tooltip4.style("top", (event.pageY+10)+"px").style("left",(event.pageX+10)+"px");})
+  .on("mouseout", function(){return tooltip4.style("visibility", "hidden");});
+  
+d3.select("#circleB19")
+  .on("mouseover", function(){return tooltip8.style("visibility", "visible");})
+  .on("mousemove", function(){return tooltip8.style("top", (event.pageY+10)+"px").style("left",(event.pageX+10)+"px");})
+  .on("mouseout", function(){return tooltip8.style("visibility", "hidden");});
+  
+ d3.select("#circleB20")
+  .on("mouseover", function(){return tooltip9.style("visibility", "visible");})
+  .on("mousemove", function(){return tooltip9.style("top", (event.pageY+10)+"px").style("left",(event.pageX+10)+"px");})
+  .on("mouseout", function(){return tooltip9.style("visibility", "hidden");}); 
+  
+  
+d3.select("#circleB16")
+  .on("mouseover", function(){return tooltip30.style("visibility", "visible");})
+  .on("mousemove", function(){return tooltip30.style("top", (event.pageY+10)+"px").style("left",(event.pageX+10)+"px");})
+  .on("mouseout", function(){return tooltip30.style("visibility", "hidden");});
+  
+ d3.select("#circleB11")
+  .on("mouseover", function(){return tooltip31.style("visibility", "visible");})
+  .on("mousemove", function(){return tooltip31.style("top", (event.pageY+10)+"px").style("left",(event.pageX+10)+"px");})
+  .on("mouseout", function(){return tooltip31.style("visibility", "hidden");});   
+  
+  
+d3.select("#circleB21")
+  .on("mouseover", function(){return tooltip32.style("visibility", "visible");})
+  .on("mousemove", function(){return tooltip32.style("top", (event.pageY+10)+"px").style("left",(event.pageX+10)+"px");})
+  .on("mouseout", function(){return tooltip32.style("visibility", "hidden");});
+  
+ d3.select("#circleB22")
+  .on("mouseover", function(){return tooltip33.style("visibility", "visible");})
+  .on("mousemove", function(){return tooltip33.style("top", (event.pageY+10)+"px").style("left",(event.pageX+10)+"px");})
+  .on("mouseout", function(){return tooltip33.style("visibility", "hidden");});   
+  
+  
+ d3.select("#circleB9")
+  .on("mouseover", function(){return tooltip34.style("visibility", "visible");})
+  .on("mousemove", function(){return tooltip34.style("top", (event.pageY+10)+"px").style("left",(event.pageX+10)+"px");})
+  .on("mouseout", function(){return tooltip34.style("visibility", "hidden");});
+  
+ d3.select("#circleB8")
+  .on("mouseover", function(){return tooltip35.style("visibility", "visible");})
+  .on("mousemove", function(){return tooltip35.style("top", (event.pageY+10)+"px").style("left",(event.pageX+10)+"px");})
+  .on("mouseout", function(){return tooltip35.style("visibility", "hidden");});    
+
+ d3.select("#circleB17")
+  .on("mouseover", function(){return tooltip36.style("visibility", "visible");})
+  .on("mousemove", function(){return tooltip36.style("top", (event.pageY+10)+"px").style("left",(event.pageX+10)+"px");})
+  .on("mouseout", function(){return tooltip36.style("visibility", "hidden");});
+  
+ d3.select("#circleB18")
+  .on("mouseover", function(){return tooltip37.style("visibility", "visible");})
+  .on("mousemove", function(){return tooltip37.style("top", (event.pageY+10)+"px").style("left",(event.pageX+10)+"px");})
+  .on("mouseout", function(){return tooltip37.style("visibility", "hidden");});    
+
+
+ d3.select("#circleB13")
+  .on("mouseover", function(){return tooltip38.style("visibility", "visible");})
+  .on("mousemove", function(){return tooltip38.style("top", (event.pageY+10)+"px").style("left",(event.pageX+10)+"px");})
+  .on("mouseout", function(){return tooltip38.style("visibility", "hidden");});    
+
+ d3.select("#circleB12")
+  .on("mouseover", function(){return tooltip39.style("visibility", "visible");})
+  .on("mousemove", function(){return tooltip39.style("top", (event.pageY+10)+"px").style("left",(event.pageX+10)+"px");})
+  .on("mouseout", function(){return tooltip39.style("visibility", "hidden");});
+  
+ d3.select("#circleB14")
+  .on("mouseover", function(){return tooltip40.style("visibility", "visible");})
+  .on("mousemove", function(){return tooltip40.style("top", (event.pageY+10)+"px").style("left",(event.pageX+10)+"px");})
+  .on("mouseout", function(){return tooltip40.style("visibility", "hidden");});    
+
+ d3.select("#circleB15")
+  .on("mouseover", function(){return tooltip41.style("visibility", "visible");})
+  .on("mousemove", function(){return tooltip41.style("top", (event.pageY+10)+"px").style("left",(event.pageX+10)+"px");})
+  .on("mouseout", function(){return tooltip41.style("visibility", "hidden");}); 
+
+circle.transition().duration(1500).delay(1000).attr("cx",100).transition().attr("cy",200);
+line.transition().duration(1500).delay(1000).attr("x1",100).attr("x2",250).transition().attr("y1",200).attr("y2",50);
+circle2.transition().duration(1500).delay(1000).attr("cx",250).transition().attr("cy",50)
+.each("end", function () {d3.select(this).attr("fill","81BEF7");});
+circle3.transition().duration(1500).delay(1000).attr("cx",250).transition().attr("cy",350)
+.each("end", function () {d3.select(this).attr("fill","81BEF7");});
+line2.transition().duration(1500).delay(1000).attr("x1",100).attr("x2",250).transition().attr("y1",200).attr("y2",350);
+
+
+circle4.transition().duration(1500).delay(1000).attr("cx",250).transition().attr("cy",50).transition().attr("cx",300).transition().attr("cy",20)
+.each("end", function () {d3.select(this).attr("fill","#81F781");});
+circle5.transition().duration(1500).delay(1000).attr("cx",250).transition().attr("cy",50).transition().attr("cx",300).transition().attr("cy",80)
+.each("end", function () {d3.select(this).attr("fill","#81F781");});
+circle6.transition().duration(1500).delay(1000).attr("cx",250).transition().attr("cy",350).transition().attr("cx",300).transition().attr("cy",320)
+.each("end", function () {d3.select(this).attr("fill","#81F781");});
+circle7.transition().duration(1500).delay(1000).attr("cx",250).transition().attr("cy",350).transition().attr("cx",300).transition().attr("cy",380)
+.each("end", function () {d3.select(this).attr("fill","#81F781");});
+line3.transition().duration(1500).delay(4000).attr("x1",250).attr("x2",300).transition().attr("y1",50).attr("y2",80);
+line4.transition().duration(1500).delay(4000).attr("x1",250).attr("x2",300).transition().attr("y1",50).attr("y2",20);
+line5.transition().duration(1500).delay(4000).attr("x1",250).attr("x2",300).transition().attr("y1",350).attr("y2",320);
+line6.transition().duration(1500).delay(4000).attr("x1",250).attr("x2",300).transition().attr("y1",350).attr("y2",380);
+
+circle8.transition().duration(1000).delay(7000).attr("r",10).each("end", function () {d3.select(this).attr("fill","pink");});
+circle9.transition().duration(1000).delay(7000).attr("r",10).each("end", function () {d3.select(this).attr("fill","pink");});
+circle10.transition().duration(1000).delay(7000).attr("r",10).each("end", function () {d3.select(this).attr("fill","pink");});
+circle11.transition().duration(1000).delay(7000).attr("r",10).each("end", function () {d3.select(this).attr("fill","pink");});
+circle12.transition().duration(1000).delay(7000).attr("r",10).each("end", function () {d3.select(this).attr("fill","pink");});
+circle13.transition().duration(1000).delay(7000).attr("r",10).each("end", function () {d3.select(this).attr("fill","pink");});
+circle14.transition().duration(1000).delay(7000).attr("r",10).each("end", function () {d3.select(this).attr("fill","pink");});
+circle15.transition().duration(1000).delay(7000).attr("r",10).each("end", function () {d3.select(this).attr("fill","pink");});
+circle16.transition().duration(1000).delay(7000).attr("r",10).each("end", function () {d3.select(this).attr("fill","pink");});
+circle17.transition().duration(1000).delay(7000).attr("r",10).each("end", function () {d3.select(this).attr("fill","pink");});
+circle18.transition().duration(1000).delay(7000).attr("r",10).each("end", function () {d3.select(this).attr("fill","pink");});
+
+circle19.transition().duration(1500).delay(1000).attr("cx",250).transition().attr("cy",200)
+.each("end", function () {d3.select(this).attr("fill","#81F781");});
+line7.transition().duration(1500).delay(1000).attr("x1",100).attr("x2",250).transition().attr("y1",200).attr("y2",200);
+
+circle20.transition().duration(1500).delay(1000).attr("cx",250).transition().attr("cy", 500)
+.each("end", function () {d3.select(this).attr("fill","#81F781");});
+line8.transition().duration(1500).delay(1000).attr("x1",100).attr("x2",250).transition().attr("y1",200).attr("y2",500);
+circle21.transition().duration(1000).delay(7000).attr("r",10).each("end", function () {d3.select(this).attr("fill","pink");});
+circle22.transition().duration(1000).delay(7000).attr("r",10).each("end", function () {d3.select(this).attr("fill","pink");});
+
+
+
+
+canvas.append("circle").attr("cx",40).attr("cy",500).attr("r", 0).style("fill", "red").transition().duration(1500).delay(1000).transition().attr("r", 10)
+canvas.append("circle").attr("cx",40).attr("cy",530).attr("r", 0).style("fill", "black").transition().duration(1500).delay(1000).transition().attr("r", 10)
+canvas.append("circle").attr("cx",40).attr("cy",560).attr("r", 0).style("fill", "#81F781").transition().duration(1500).delay(1000).transition().attr("r", 10)
+canvas.append("circle").attr("cx",40).attr("cy",590).attr("r", 0).style("fill", "pink").transition().duration(1500).delay(1000).transition().attr("r", 10)
+canvas.append("text").attr("x", 60).attr("y", 500).text("Subfamilia").style("font-size", "0px").attr("alignment-baseline","middle").transition().duration(2000).delay(2000).transition().style("font-size", "15px")
+canvas.append("text").attr("x", 60).attr("y", 530).text("Tribu").style("font-size", "0px").attr("alignment-baseline","middle").transition().duration(2000).delay(2000).transition().style("font-size", "15px")
+canvas.append("text").attr("x", 60).attr("y", 560).text("Genero").style("font-size", "0px").attr("alignment-baseline","middle").transition().duration(2000).delay(2000).transition().style("font-size", "15px")
+canvas.append("text").attr("x", 60).attr("y", 590).text("Especie").style("font-size", "0px").attr("alignment-baseline","middle").transition().duration(2000).delay(2000).transition().style("font-size", "15px")
+init();
+
+	function init(){
+	
+		var scene, aspect, camera, camera2, renderer, controls;
+        var mapWidth = 320, mapHeight = 240;
+        var w = window.innerWidth, h = window.innerHeight;
+        var frustumSize = 5;
+		var startTime = Date.now();
+		
+		init();
+		animate();
+	
+		function init(){
+			scene = new THREE.Scene();
+			scene.background = new THREE.Color( 0xAAAAAA );
+			aspect = window.innerWidth / window.innerHeight;
+			camera = new THREE.PerspectiveCamera( 45, aspect, 0.1, 1000);
+			camera2 = new THREE.PerspectiveCamera( 45, 1.33, 0.1, 50);
+            var helper = new THREE.CameraHelper( camera2 );
+            scene.add( helper );
+			renderer = new THREE.WebGLRenderer({antialias: true});
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			document.body.appendChild( renderer.domElement );
+			controls = new THREE.OrbitControls( camera, renderer.domElement );
+            
+			var vector = new THREE.Vector3();
+			camera2.getWorldDirection( vector );
+			console.log(vector);
+			
+			var size = 10;
+			var arrowSize = 1;
+			var divisions = size;
+			var origin = new THREE.Vector3( 0, 0, 0 );
+			var x = new THREE.Vector3( 1, 0, 0 );
+			var y = new THREE.Vector3( 0, 1, 0 );
+		  	var z = new THREE.Vector3( 0, 0, 1 );
+			var color1 = new THREE.Color( 0xFFFFFF );
+		  	var color2 = new THREE.Color( 0x333333 );
+		  	var colorR = new THREE.Color( 0xAA3333 );
+		  	var colorG = new THREE.Color( 0x33AA33 );
+		  	var colorB = new THREE.Color( 0x333366 );
+		  
+		  	//CREAR LAS GRILLAS PARA EL ESCENARIO
+		  	var axesHelper = new THREE.AxesHelper( size );
+		  	var gridHelperXY = new THREE.GridHelper( size, divisions, color1, color1);
+		  	var gridHelperXZ = new THREE.GridHelper( size, divisions, color2, color2 );
+		  	var gridHelperYZ = new THREE.GridHelper( size, divisions, color2, color2 );
+            
+            //ROTARLAS PARA QUE QUEDEN EN EL ESPACIO ADECUADO
+            gridHelperXY.rotateOnWorldAxis ( x, THREE.Math.degToRad(90) );
+            gridHelperXZ.rotateOnWorldAxis ( y, THREE.Math.degToRad(90) );
+            gridHelperYZ.rotateOnWorldAxis ( z, THREE.Math.degToRad(90) );
+            
+            //CREAR LAS FLECHAS QUE INDICAN LOS EJES DE COORDENADAS 3D
+            var arrowX = new THREE.ArrowHelper( x, origin, arrowSize, colorR );
+            var arrowY = new THREE.ArrowHelper( y, origin, arrowSize, colorG );
+            var arrowZ = new THREE.ArrowHelper( z, origin, arrowSize, colorB );
+            
+            //CREAR ILUMINACIÓN
+            var ambient = new THREE.AmbientLight( 0xffffff, 2 );
+            scene.add( ambient );
+            
+            var pointLight = new THREE.PointLight( 0xffffff, 1, 100 );
+            pointLight.position.set( 5, 5, -5 );
+            scene.add( pointLight );
+            
+			camera.position.x = 5;
+			camera.position.y = 5;
+		  	camera.position.z = 10;
+			
+		  	camera.lookAt( origin );
+	}
+
+//d3.json("mydata.json", function (data){
+//canvas.selectAll("text")
+//.data(data).enter().append("text").attr("fill", "green").attr("y",function(d, i){ return i*50;})
+//.text(function (d) {return d.name; })
+//})
+</script>
+</body>
+</html>
