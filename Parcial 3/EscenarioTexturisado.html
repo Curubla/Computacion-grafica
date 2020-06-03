@@ -1,0 +1,428 @@
+ <!DOCTYPE html>
+<html>
+  <head>
+    <title>Sr. Cubo y su show (no me alcazo el tiempo para hacer otro personaje :c)</title>
+    <style>
+      html, body { margin: 0; padding: 0; overflow: hidden; }
+    </style>
+  </head>
+  <body>
+    <script src="js/three.js"></script>
+    <script src="js/controls/OrbitControls.js"></script>
+	<script src="js/csg.js"></script>
+	<script src="js/THREE.CSG.js"></script>
+	
+    <script>
+		var scene, aspect, camera, renderer, controls;
+		var startTime = Date.now();
+		var PacoElFlaco;
+		var mapWidth = 320, mapHeight = 240;
+		var w = window.innerWidth, h = window.innerHeight;
+		var aKey = false;
+        var sKey = false;
+        var dKey = false;
+		var qKey = false;
+        var wKey = false;
+        var eKey = false;
+		var Personaje;
+		var light2;
+		var sumL=1;
+
+
+
+
+
+		init();
+		animate();
+	
+		function init(){
+		
+		
+		
+			var onKeyDown = function ( event ) {
+				switch ( event.keyCode ) {
+						
+					case 65: // ROTAR X
+						aKey = true;
+						break;
+					case 83: // ROTAR Y
+						sKey = true;
+						break;
+                    case 68: // ROTAR Z
+						dKey = true;
+						break;
+					case 81: // 
+						qKey = true;
+						break;	
+					case 87: // ROTAR Z
+						wKey = true;
+						break;
+					case 69: // ROTAR Z
+						eKey = true;
+						break;
+					
+				}
+			};	
+
+			var onKeyUp = function ( event ) {
+				switch ( event.keyCode ) {
+					
+				
+					case 65: // 
+						aKey = false;
+						break;
+					case 83: // 
+						sKey = false;
+						break;
+                    case 68: // 
+						dKey = false;
+						break;
+					case 81: // 
+						qKey = false;
+						break;	
+					case 87: // ROTAR Z
+						wKey = false;
+						break;
+					case 69: // ROTAR Z
+						eKey = false;
+						break;
+					
+					
+				}
+			};
+			
+			document.addEventListener( 'keydown', onKeyDown, false );
+			document.addEventListener( 'keyup', onKeyUp, false );
+		  
+		
+			scene = new THREE.Scene();
+			scene.background = new THREE.Color( 0x364A73 );
+			aspect = window.innerWidth / window.innerHeight;
+			camera = new THREE.PerspectiveCamera( 45, aspect, 0.1, 1000);
+			
+			renderer = new THREE.WebGLRenderer({alpha: true});
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			document.body.appendChild( renderer.domElement );
+			controls = new THREE.OrbitControls( camera, renderer.domElement );
+				  
+			var size = 10;
+			var arrowSize = 1;
+			var divisions = size;
+			var origin = new THREE.Vector3( 0, 0, 0 );
+
+
+			PacoElFlaco = new THREE.PerspectiveCamera( 45, 1, 0.1, 1000);
+			
+			
+			//TEXTURAS
+			var textureLoader = new THREE.TextureLoader();
+			textureLoader.crossOrigin = "Anonymous";
+
+
+			/*
+			CurtainC=textureLoader.load("http://www.avilagab.com/umng/CGCAJ20201/parcial3/theater.jpg");
+			CurtainA=textureLoader.load("http://www.avilagab.com/umng/CGCAJ20201/parcial3/theaterAlpha.jpg");
+
+			SillasC=textureLoader.load("https://images.freeimages.com/images/large-previews/c4c/red-texture-1170921.jpg");
+			*/
+			EscT=textureLoader.load("https://www.wizard.ch/wp-content/uploads/5196-4V-1_Wood-Texture.jpg");
+			
+			SillasC=textureLoader.load("Texturas/SillaT.jpg");
+			CurtainC=textureLoader.load("Texturas/cortinasB.jpg");
+			CurtainA=textureLoader.load("Texturas/cortinasA.jpg");
+			
+			//materiales
+			
+
+			var EscenarioMat = new THREE.MeshStandardMaterial( {color: 0xffa54f, map: EscT} );
+
+			var SillaMat = new THREE.MeshPhongMaterial( {color: 0xb80707, map: SillasC} );
+			var PlanoMat = new THREE.MeshPhongMaterial( {color: 0xd1b000} );
+
+			PlanoMat.side = THREE.DoubleSide;
+
+			var CortinasMat = new THREE.MeshPhongMaterial( {color: 0xffffff, map: CurtainC, alphaMap:CurtainA, transparent: true} );
+
+			CortinasMat.side = THREE.DoubleSide;
+			
+			//OBJETOS
+			var Escenario1 = new THREE.Mesh( 
+				new THREE.BoxGeometry( 40, 6, 20), 
+				EscenarioMat
+				) 
+			scene.add( Escenario1 );
+			
+			var Escenario2 = new THREE.Mesh( 
+				new THREE.BoxGeometry( 20, 6, 8), 
+				EscenarioMat
+				)
+			
+			Escenario2.translateZ(14);
+			scene.add( Escenario2 );
+
+			var Cortinas = new THREE.Mesh(
+				new THREE.PlaneGeometry(40,40),
+				CortinasMat
+			)
+			Cortinas.translateY(20);
+			scene.add(Cortinas);
+			
+
+			var PLanoEscene = new THREE.Mesh(
+				new THREE.PlaneGeometry(80,80),
+				PlanoMat
+			)
+			PLanoEscene.rotateX(-3.14/2);
+			PLanoEscene.translateZ(-3);
+			PLanoEscene.translateY(-30);
+			scene.add( PLanoEscene);
+
+			//Sillas Bases
+
+			var SillaBase = new THREE.Mesh(
+				new THREE.BoxGeometry(4,4,4),
+				SillaMat
+			)
+
+			SillaBase.translateZ(35);
+			SillaBase.translateY(-1);
+
+			//scene.add(SillaBase);
+
+			var EspaldaBase = new THREE.Mesh(
+				new THREE.BoxGeometry(4,4,1),
+				SillaMat
+			)
+
+			EspaldaBase.translateZ(1.5);
+			EspaldaBase.translateY(2);
+
+			SillaBase.add(EspaldaBase);
+
+			//scene.add(EspaldaBase);
+
+			//Sillas 
+			
+
+			//Primera ileara centro
+			var Silla1 = SillaBase.clone();
+			//scene.add(Silla1);
+
+			var Silla2 = SillaBase.clone();
+			Silla2.translateX(-8);
+			//scene.add(Silla2);
+
+			var Silla3 = SillaBase.clone();
+			Silla3.translateX(8);
+			//scene.add(Silla3);
+
+			//Primera ileara Izquierda
+			var Silla4 = SillaBase.clone();
+			Silla4.translateX(-24);
+			Silla4.translateZ(-6);
+			Silla4.rotateY(-3.14/5);
+			
+			//scene.add(Silla4);
+
+			var Silla5 = SillaBase.clone();
+			Silla5.translateX(-30);
+			Silla5.translateZ(-10);
+			Silla5.rotateY(-3.14/5);
+			
+			//scene.add(Silla5);
+
+			//Primera ileara Derecha
+			var Silla6 = SillaBase.clone();
+			Silla6.translateX(24);
+			Silla6.translateZ(-6);
+			Silla6.rotateY(3.14/5);
+			
+			//scene.add(Silla6);
+
+			var Silla7 = SillaBase.clone();
+			Silla7.translateX(30);
+			Silla7.translateZ(-10);
+			Silla7.rotateY(3.14/5);
+			
+			//scene.add(Silla7);
+
+			var ilera1 = new THREE.Mesh(
+				new THREE.PlaneGeometry(1,1),
+				SillaMat
+			)
+			var ilera1;
+			ilera1.add(Silla1);
+			ilera1.add(Silla2);
+			ilera1.add(Silla3);
+			ilera1.add(Silla4);
+			ilera1.add(Silla5);
+			ilera1.add(Silla6);
+			ilera1.add(Silla7);
+			scene.add(ilera1);
+
+			var ilera2 = ilera1.clone();
+
+			ilera2.translateZ(15);
+			ilera2.translateY(2);
+
+			scene.add(ilera2);
+		
+			var ilera3 = ilera1.clone();
+
+			ilera3.translateZ(30);
+			ilera3.translateY(4);
+
+			scene.add(ilera3);	
+
+		
+			//Base Sillas
+			var Base1C = new THREE.Mesh( 
+				new THREE.BoxGeometry( 30, 2, 15), 
+				EscenarioMat
+				) 
+
+			Base1C.translateZ(45);
+
+			scene.add( Base1C );
+
+
+			var Base2C = new THREE.Mesh( 
+				new THREE.BoxGeometry( 30, 4, 15), 
+				EscenarioMat
+				) 
+
+			Base2C.translateZ(60);
+
+			scene.add( Base2C );
+
+
+			//Personaje
+
+			Personaje = new THREE.Mesh( 
+				new THREE.BoxGeometry( 4, 4, 4), 
+				EscenarioMat
+				) 
+
+			Personaje.translateY(10);
+
+			scene.add( Personaje );
+
+
+			
+			
+			//Luces
+			var light = new THREE.AmbientLight( 0xf6cd8b ); 
+			scene.add( light );
+			
+			var directionalLight1 = new THREE.DirectionalLight( 0xede9da, 1);
+			directionalLight1.position.set( 40, 4, 35 );
+			directionalLight1.target = Escenario1;
+			//scene.add( directionalLight1 );
+			
+			
+			
+			Luces1 = new THREE.PointLight( 0xf6cd8b, 3, 30 );
+			Luces1.position.set( 40, 8, 25 );
+			scene.add( Luces1 );
+
+			Luces2 = new THREE.PointLight( 0xf6cd8b, 3, 30 );
+			Luces2.position.set( 40, 10, 40 );
+			scene.add( Luces2 );
+
+			Luces3 = new THREE.PointLight( 0xf6cd8b, 3, 30 );
+			Luces3.position.set( 40, 12, 55 );
+			scene.add( Luces3 );
+
+
+			Luces4 = new THREE.PointLight( 0xf6cd8b, 3, 30 );
+			Luces4.position.set( -40, 8, 25 );
+			scene.add( Luces4 );
+
+			Luces5 = new THREE.PointLight( 0xf6cd8b, 3, 30 );
+			Luces5.position.set( -40, 10, 40 );
+			scene.add( Luces5 );
+
+			Luces6 = new THREE.PointLight( 0xf6cd8b, 3, 30 );
+			Luces6.position.set( -40, 12, 55 );
+			scene.add( Luces6 );
+			
+			var spotLight1 = new THREE.SpotLight( 0xffffff, 10, 80, 3.14/20);
+			spotLight1.position.set( 40, 40, 0 );
+
+			spotLight1.castShadow = true;
+			spotLight1.target = Personaje;
+
+			scene.add( spotLight1 );
+
+			var spotLight2 = new THREE.SpotLight( 0xffffff, 10, 80, 3.14/20);
+			spotLight2.position.set( -40, 40, 0 );
+
+			spotLight2.castShadow = true;
+			spotLight2.target = Personaje;
+
+			scene.add( spotLight2 );
+
+			var spotLight3 = new THREE.SpotLight( 0xffffff, 7, 50, 3.14);
+			spotLight3.position.set( 0, 40, 40 );
+
+			spotLight3.castShadow = true;
+			spotLight3.target = Base1C;
+
+			scene.add( spotLight3 );
+			
+			
+			camera.position.x = -45;
+			camera.position.y = 100;	 
+		  	camera.position.z =  135;
+			
+		  	camera.lookAt( origin );
+
+			PacoElFlaco.position.x = 5;
+			PacoElFlaco.position.y = 17;
+		  	PacoElFlaco.position.z = 82;
+			PacoElFlaco.lookAt( 0,10,0 );
+			
+			renderer.render( scene, camera );
+		}
+		function animate() {
+			requestAnimationFrame( animate );
+			controls.update(); // required if controls.enableDamping = true, or if controls.autoRotate = true
+			render();
+		}
+		function render() {
+			renderer.setViewport( 0, 0, w, h );
+            renderer.setScissor( 0, 0, w, h );
+            renderer.render( scene, camera );
+
+			renderer.setViewport( 10, 10, mapWidth, mapHeight );
+            renderer.setScissor( 10, 10, mapWidth, mapHeight );
+            renderer.setScissorTest( true );
+            renderer.render( scene, PacoElFlaco );
+
+			//console.log(camera.position);
+			
+			if(wKey){
+				Personaje.translateZ(0.1);
+
+			}
+
+			if(sKey){
+				Personaje.translateZ(-0.1);
+
+			}
+
+			if(dKey){
+				Personaje.translateX(0.1);
+
+			}
+
+			if(aKey){
+				Personaje.translateX(-0.1);
+
+			}
+
+
+		}
+    </script>
+  </body>
+</html>
